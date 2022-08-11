@@ -9,6 +9,7 @@ class SignupController extends ControllerBase{
 
     public function registerAction()
     {
+        
         $user = new Users();
 
         // Store and check for errors
