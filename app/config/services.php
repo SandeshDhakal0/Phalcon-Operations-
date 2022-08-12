@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 use Phalcon\Escaper;
 use Phalcon\Flash\Direct as Flash;
+use Phalcon\Flash\Direct as FlashDirect;
 use Phalcon\Mvc\Model\Metadata\Memory as MetaDataAdapter;
 use Phalcon\Mvc\View;
 use Phalcon\Mvc\View\Engine\Php as PhpEngine;
@@ -105,6 +106,21 @@ $di->set('flash', function () {
     ]);
 
     return $flash;
+});
+
+
+$di->set('flashSession', function(){
+    $escaper = new Escaper();
+    $flashSession = new Phalcon\Flash\Session($escaper);
+    
+    $flashSession->setCssClasses([
+        'error'   => 'alert alert-danger msg',
+        'success' => 'alert alert-success msg',
+        'notice'  => 'alert alert-info msg',
+        'warning' => 'alert alert-warning msg'
+    ]);
+
+    return $flashSession;
 });
 
 /**
