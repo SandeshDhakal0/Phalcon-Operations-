@@ -7,17 +7,15 @@ class RegisterForm extends Form
 {
     public function initialize()
 {
-$form = new Form();
-
-$form->add(
+$this->add(
     new Text(
-        'nameLast'
+        'name'
     )
 );
 
-$form->add(
+$this->add(
     new Text(
-        'nameFirst'
+        'telephone'
     )
 );
 }

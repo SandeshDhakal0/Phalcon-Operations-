@@ -1,18 +1,18 @@
 <?php 
 use Phalcon\Http\Request;
 // use Phalcon\Filter;
-use App\Forms\RegisterForm;
+
 
 class SignupController extends ControllerBase{
 
     public function indexAction()
     {
-        
+       
     }
 
     public function registerAction()
     {
-        $request = new Request();
+        // $request = new Request();
         $user = new Users();
 
         if (!$this->request->isPost()) {
