@@ -4,6 +4,7 @@ declare(strict_types=1);
 use Phalcon\Escaper;
 use Phalcon\Flash\Direct as Flash;
 use Phalcon\Flash\Direct as FlashDirect;
+use Phalcon\Flash\Session as FlashSession;
 use Phalcon\Mvc\Model\Metadata\Memory as MetaDataAdapter;
 use Phalcon\Mvc\View;
 use Phalcon\Mvc\View\Engine\Php as PhpEngine;
@@ -94,7 +95,9 @@ $di->setShared('modelsMetadata', function () {
 /**
  * Register the session flash service with the Twitter Bootstrap classes
  */
-$di->set('flash', function () {
+$di->set(
+    'flash', 
+    function () {
     $escaper = new Escaper();
     $flash = new Flash($escaper);
     $flash->setImplicitFlush(false);
@@ -104,7 +107,6 @@ $di->set('flash', function () {
         'notice'  => 'alert alert-info',
         'warning' => 'alert alert-warning'
     ]);
-
     return $flash;
 });
 
@@ -112,7 +114,6 @@ $di->set('flash', function () {
 $di->set('flashSession', function(){
     $escaper = new Escaper();
     $flashSession = new Phalcon\Flash\Session($escaper);
-    
     $flashSession->setCssClasses([
         'error'   => 'alert alert-danger msg',
         'success' => 'alert alert-success msg',

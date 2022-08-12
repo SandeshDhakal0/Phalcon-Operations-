@@ -1,4 +1,7 @@
 <?php 
+use Phalcon\Http\Request;
+// use Phalcon\Filter;
+use App\Forms\RegisterForm;
 
 class SignupController extends ControllerBase{
 
@@ -9,16 +12,27 @@ class SignupController extends ControllerBase{
 
     public function registerAction()
     {
+        $request = new Request();
         $user = new Users();
+
+        if (!$this->request->isPost()) {
+         return $this->response->redirect('signup');
+        }
+        $name = $this->request->getPost('name',['trim','string']);
+        $email = $this->request->getPost('email',['trim','email']);
+        
         // Store and check for errors
-            // var_dump($this->request->getPost());die();
         $success = $user->save(
-            $this->request->getPost(),
+            [
+                "name" => $name,
+                "email" => $email
+            ],
             [
                 "name",
-                "email",
+                "email"
             ]
         );
+        //  print_r($this->request->getPost());
         if ($success) {
             $this->flashSession->success("The user is registered.");
             return $this->response->redirect('signup');
